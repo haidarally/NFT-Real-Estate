@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/haidarally/Lavnish/issues"
   },
-  "homepage": "https://github.com/haidarally/Lavnish#readme"
+  "homepage": "https://github.com/haidarally/Lavnish#readme",
+  "devDependencies": {
+    "@smartdec/smartcheck": "^2.0.1"
+  }
 }
