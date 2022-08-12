@@ -1,4 +1,5 @@
-pragma solidity >= 0.6.0 < 0.9.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;//>= 0.6.0 < 0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -40,7 +41,7 @@ contract PropertyMinter is ERC721,ERC721URIStorage, Ownable, AccessControl {
     uint256 public arrayLength;
 
 
-    constructor(address[] memory notaries) ERC721 (tokenName,tokenTicker) public {
+    constructor(address[] memory notaries) ERC721 (tokenName,tokenTicker) {
         propertyCounter =0;
 
     for (uint256 i = 0; i < notaries.length; ++i) {
@@ -112,15 +113,7 @@ contract PropertyMinter is ERC721,ERC721URIStorage, Ownable, AccessControl {
         UpdateStatusData(from,tokenId);
     }
 
-    //helper
-        function indexOf(string[] memory arr, string memory searchFor) private pure returns (int) {
-    for (uint i = 0; i < arr.length; i++) {
-        if (keccak256(abi.encodePacked(arr[i])) == keccak256(abi.encodePacked(searchFor))) {
-        return int(i);
-        }
-    }
-        return -1; // not found
-    }
+   
 
 
 
@@ -156,8 +149,8 @@ contract PropertyMinter is ERC721,ERC721URIStorage, Ownable, AccessControl {
         return UserProperties[_address];
     }
 
-    function UpdateStatusData(address _addressX,uint256 _tokenId) internal {
-        //ProperyStruct[] memory userProperties = UserProperties[_address];
+    function UpdateStatusData(address _addressX,uint256 _tokenId) internal view{
+
         string memory _address = Strings.toHexString(uint256(uint160(_addressX)), 20);
         PropertyStruct[] memory propertyStructsUser_ = UserProperties[_address];
            
@@ -167,6 +160,16 @@ contract PropertyMinter is ERC721,ERC721URIStorage, Ownable, AccessControl {
         }
         }
 
+    }
+
+     //helper
+    function indexOf(string[] memory arr, string memory searchFor) private pure returns (int) {
+    for (uint i = 0; i < arr.length; i++) {
+        if (keccak256(abi.encodePacked(arr[i])) == keccak256(abi.encodePacked(searchFor))) {
+        return int(i);
+        }
+    }
+        return -1; // not found
     }
 
 }
