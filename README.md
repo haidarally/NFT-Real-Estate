@@ -1,4 +1,4 @@
-# Lavnish
+# University Project
 
 # compile contracts
 npx hardhat compile --verbose
